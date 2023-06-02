@@ -1,8 +1,18 @@
 # Backbone-flask-docker
-Chatgpt help me to generate backbone flask app run with docker instance, and deploy to google cloud. and SSL is considered as well.
+# Flask App with Docker and Google Cloud Run
 
+ChatGPT helped me generate the backbone of a Flask app, run it with Docker, and deploy it to Google Cloud. SSL is also considered.
 
-Here's a simplified example of how you might set up a Flask app with a simple UI, then Dockerize it for deployment on Google Cloud Run. For simplicity, we'll just have a single route that returns a message.
+## Flask App Setup
+
+Create a new directory for your project. In this directory, create the following files:
+
+1. `app.py` - Your Flask app
+2. `requirements.txt` - Dependencies for your Flask app
+3. `Dockerfile` - Instructions for building your Docker image
+
+Then, you can build your Docker image with the following command:
+
 
 First, create a new directory for your project, and in that directory, create the following files:
 
