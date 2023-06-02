@@ -1,0 +1,55 @@
+Here's a simplified example of how you might set up a Flask app with a simple UI, then Dockerize it for deployment on Google Cloud Run. For simplicity, we'll just have a single route that returns a message.
+
+First, create a new directory for your project, and in that directory, create the following files:
+
+app.py (your Flask app)
+
+requirements.txt (dependencies for your Flask app)
+
+Gunicorn is a WSGI HTTP server for Python web applications.
+
+Dockerfile (instructions for building your Docker image)
+
+
+Then, you can build your Docker image with:
+
+docker build -t my-flask-app .
+
+AND run it
+
+docker run -p 4000:8080 my-flask-app
+
+
+You should now be able to access your app at localhost:4000.
+
+To deploy your Dockerized Flask app to Google Cloud Run, you first need to install the Google Cloud SDK, then:
+
+Build your Docker image using Cloud Build, by running the following command from the directory containing the Dockerfile:
+
+
+gcloud builds submit --tag gcr.io/PROJECT-ID/my-flask-app
+
+
+Deploy your image to Cloud Run:
+
+gcloud run deploy --image gcr.io/PROJECT-ID/my-flask-app --platform managed
+
+
+As for SSL, when you deploy a service to Cloud Run, it automatically provides a https:// URL, so no additional SSL setup is required.
+
+Please replace "PROJECT-ID" with your actual Google Cloud project ID. And also make sure that you have the necessary permissions and the billing is enabled for your Google Cloud project.
+
+This is a simple setup and might not meet all your needs, but hopefully, it provides a good starting point for your application.
+
+To use your own domain with SSL on Google Cloud Run, you can follow these steps:
+
+Configure your domain with Google Cloud Run: This can be done directly through the Google Cloud Console under "Cloud Run" > "Settings". There, you'll be able to map your custom domain to your Cloud Run service. During this process, Google Cloud will provide you with a number of DNS records.
+
+Update your DNS settings: Once you have these DNS records, you'll need to add them to your domain's DNS configuration. This is usually done through your domain registrar (the service you bought your domain from). This process verifies domain ownership and routes traffic for your domain to your Cloud Run service.
+
+SSL configuration: After your domain is verified and mapped to your Cloud Run service, Google Cloud automatically provisions an SSL certificate for your custom domain using Let's Encrypt. The provisioning process can take up to 24 hours.
+
+Check SSL certificate status: You can check the status of the SSL certificate in the "Settings" page under "Cloud Run" in Google Cloud Console. Once the status is "Active", your site should be available over HTTPS.
+
+This way, you can use your own custom domain with SSL on your Cloud Run service. Remember to replace myapp with the actual name of your Cloud Run service.
+
